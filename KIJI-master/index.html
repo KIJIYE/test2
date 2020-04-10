@@ -1,0 +1,211 @@
+<!doctype html>
+
+
+<html>
+  <head>
+    <title>K I J I - HOME</title>
+        <link rel="icon" type="image/ico" href="logokiji.png" />
+         <!-- you can also say this:
+          <link rel="icon" type="image/png" href="location/image.png" /> -->
+    <meta charset="utf-8">
+    <script language="javascript" type="text/javascript" src="js/p5.js"></script>
+    <!-- uncomment lines below to include extra p5 libraries -->
+    <script language="javascript" src="js/addons/p5.dom.js"></script>
+    <!--<script language="javascript" src="js/addons/p5.sound.js"></script>-->
+    <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
+    <style>
+
+
+      [title~=INDEXIMG] {
+        border: 1px none red;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .BLUELIGHT {
+        margin-left: 60%;
+        margin-right: auto;
+      }
+      .dotborder {
+        border: 30px dotted green;
+        padding: 30px;
+        background: none;
+        margin-left: 200px;
+        margin-right: 200px;
+        height: 500px;
+        margin-top: -100px;
+      }
+
+      body {
+        background-image: url("MVI_7621.gif");
+        background-size: 400px;
+      }
+
+      /* childlist 하위 항목 링크들 */
+      #childlist {
+        color: skyblue;
+        text-decoration:none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        text-shadow: -9px 0 black, 0 9px black, 9px 0 black, 0 -9px black;
+        text-shadow: -15px 0 black, 0 15px black, 15px 0 black, 0 -15px black;
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 70px;
+        text-align:center;
+        font-family: arial;
+        color: white;
+        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
+      }
+      /* 이거 h1 관련한 링크 밑줄 없애기 관련 start*/
+      a:link {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      a:visited {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      a:active {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      a: hover {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      /* 이거 h1 관련한 링크 밑줄 없애기 관련 finish */
+
+      .fonttest {
+        background-color: green;
+      }
+      table, th, td {
+        border: 1px solid black;
+        text-align: center;
+      }
+      /* hover 사용하면 table의 tr 위 마우스 올라갔을시 색 변경가능 */
+      tr:hover {
+        background-color: green;
+      }
+      th, td {
+        padding: 40px;
+      }
+      li {
+        display: block;
+      }
+
+      .rainbow {
+        width: 300px;
+        height: 300px;
+        background-color: #3264bc;
+        position: relative;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes example {
+        0% {background-color: #3264bc; left: 0%; top: 0%;}
+        25% {background-color: #2eaf88; left: 60%; top: 0%;}
+        50% {background-color: #5e01fe; left: 60%; top: 0%;}
+        75% {background-color: #008200; left: 0%; top: 0%;}
+        100% {background-color: #3264bc; left: 0%; top: 0%;}
+      }
+
+    </style>
+  </head>
+  <body>
+
+   <div>
+    <h1><a href="index.html">K I J I</a></h1>
+  </div>
+
+    <button type="button" onclick="document.querySelector('body').style.backgroundColor='green';
+    document.querySelector('body').style.color='black';" id="button1">K I J I</button>
+
+    <button type="button" onclick="document.querySelector('body').style.backgroundColor='black';
+    document.querySelector('body').style.color='green';" id="button1">K I M J A E</button>
+
+    <a href="contact.html" id="button1"><button>CONTACT</button></a>
+
+    <br><br><br><P><table>
+      <tr>
+        <th>NAME</th>
+        <th>GOOD</th>
+        <th>NEXT</th>
+        <th>MINE</th>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>M</td>
+        <td>K</td>
+        <td>I</td>
+        <td>E</td>
+        <td>J</td>
+      </tr>
+    </table></P>
+    <ul>
+      <br><li><a href="1.html" id="childlist"><strong>단기임대</strong></a></li>
+      <li><a href="2.html" id="childlist"="2.html"><strong>보라곰팡이</strong></a></li>
+      <li><a href="3.html" id="childlist"="3.html"><strong>비장소</strong></a></li>
+    </ul>
+
+<!--
+    <ul>
+      <br><li><a href="1.html"><font color="orange"><strong>단기임대</strong></font></a></li>
+      <li><a href="2.html"><font color="orange"><strong>보라곰팡이</strong></font></a></li>
+      <li><a href="3.html"><font color="orange"><strong>비장소</strong></font></a></li>
+    </ul>
+-->
+
+        <p>
+          <img src="HOME.png" class="CIRCLE "title="INDEXIMG" width="800px" height="560px">
+          <img src="R0010971.JPG" class="BLUELIGHT" title="INDEXIMG" width="400px" height="400px">
+          <div class="dotborder" title="INDEXIMG"></div>
+        </p>
+
+        <div class="rainbow">
+        </div>
+
+<p><div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://kiji.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></p>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d205f5e22d70e36c2a46b1c/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+  </body>
+</html>

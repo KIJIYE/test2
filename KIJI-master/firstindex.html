@@ -1,0 +1,161 @@
+<!doctype html>
+
+
+<html>
+  <head>
+    <title>K I J I - HOME</title>
+    <meta charset="utf-8">
+    <style>
+
+    .image {
+       position: relative;
+    }
+
+    .imageOne {
+      width: 800px;
+      height: 563px;
+      border: 0px none;
+      background-image: url(HOME.png);
+      background-size: 800px;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+    .imageTwo {
+      width: 800px;
+      height: 800px;
+      background-image: url(R0010971.JPG);
+      background-size: 800px;
+      margin-top: -250px;
+      margin-left: inherit;
+    }
+
+    body {
+      background-image: url("MVI_7621.gif");
+      background-size: 400px;
+    }
+      a {
+        color: skyblue;
+        text-decoration:none;
+      }
+       {
+      font-family: verdana;
+      font-size: 20px;
+      }
+      h1 {
+        font-size: 70px;
+        text-align:center;
+        font-family: arial;
+      }
+
+      .fonttest {
+        background-color: green;
+      }
+      table, th, td {
+        border: 1px solid black;
+        text-align: center;
+      }
+      /* hover 사용하면 table의 tr 위 마우스 올라갔을시 색 변경가능 */
+      tr:hover {
+        background-color: green;
+      }
+      th, td {
+        padding: 40px;
+      }
+      li {
+        display: block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <H1><a href="index.html">K I M J A E</a></h1>
+
+     <form action="/action_page.php" method="get">
+       KIJI: <input type="text" name="fname"><br>
+       KIMJAE: <input type="text" name="lname"><br>
+       <input type="submit" value="Submit">
+     </form>
+
+    <input type="button" value="K I J I" onclick="
+     document.querySelector('body').style.backgroundColor='green';
+     document.querySelector('body').style.color='black';
+    ">
+    <input type="button" value="K I M J A E" onclick="
+     document.querySelector('body').style.backgroundColor='black';
+     document.querySelector('body').style.color='green';
+    ">
+
+    <P><table>
+      <tr>
+        <th>NAME</th>
+        <th>GOOD</th>
+        <th>NEXT</th>
+        <th>MINE</th>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>M</td>
+        <td>K</td>
+        <td>I</td>
+        <td>E</td>
+        <td>J</td>
+      </tr>
+    </table></P>
+    <ul>
+      <br><li><a href="1.html"><strong>단기임대</strong></a></li>
+      <li><a href="2.html"><strong>보라곰팡이</strong></a></li>
+      <li><a href="3.html"><strong>비장소</strong></a></li>
+    </ul>
+
+<!--
+    <ul>
+      <br><li><a href="1.html"><font color="orange"><strong>단기임대</strong></font></a></li>
+      <li><a href="2.html"><font color="orange"><strong>보라곰팡이</strong></font></a></li>
+      <li><a href="3.html"><font color="orange"><strong>비장소</strong></font></a></li>
+    </ul>
+-->
+
+        <p>
+            <div class="imageOne image"></div>
+            <div class="imageTwo image"></div>
+        </p>
+
+<p><div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://kiji.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></p>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d205f5e22d70e36c2a46b1c/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+  </body>
+</html>

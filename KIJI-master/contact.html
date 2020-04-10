@@ -1,0 +1,685 @@
+<!doctype html>
+
+
+<html>
+  <head>
+    <title>K I J I - HOME</title>
+    <meta charset="utf-8">
+    <style>
+
+      body {
+        background-image: url("MVI_7621.gif");
+        background-size: 400px;
+      }
+
+      h1 {
+        font-size: 70px;
+        text-align:center;
+        font-family: arial;
+        color: white;
+        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
+      }
+      /* 이거 h1 관련한 링크 밑줄 없애기 관련 start*/
+      a:link {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      a:visited {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      a:active {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      a: hover {
+        text-decoration: none;
+        color: #f4ffff;
+      }
+      /* 이거 h1 관련한 링크 밑줄 없애기 관련 finish */
+
+      .fonttest {
+        background-color: green;
+      }
+      table, th, td {
+        border: 1px solid black;
+        text-align: center;
+      }
+      /* hover 사용하면 table의 tr 위 마우스 올라갔을시 색 변경가능 */
+      tr:hover {
+        background-color: green;
+      }
+      th, td {
+        padding: 40px;
+      }
+
+      #childlist {
+        color: skyblue;
+        text-decoration:none;
+        display: block;
+        text-align: center;
+        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
+        font-size: 30px;
+      }
+      #childlista {
+        color: skyblue;
+      }
+
+    </style>
+
+    </head>
+
+    <body>
+
+     <div>
+      <h1><a href="index.html">K I J I</a></h1>
+    </div>
+
+      <input type="button" value="K I J I" onclick="
+       document.querySelector('body').style.backgroundColor='green';
+       document.querySelector('body').style.color='black';
+      ">
+      <input type="button" value="K I M J A E" onclick="
+       document.querySelector('body').style.backgroundColor='black';
+       document.querySelector('body').style.color='green';
+      ">
+
+      <p>
+        <html><body><pre>
+
+<span style="color: #33997E;">import</span> processing.sound.*;
+
+<span style="color: #33997E;">import</span> ddf.minim.*;
+<span style="color: #33997E;">import</span> ddf.minim.analysis.*;
+<span style="color: #33997E;">import</span> ddf.minim.effects.*;
+<span style="color: #33997E;">import</span> ddf.minim.signals.*;
+<span style="color: #33997E;">import</span> ddf.minim.spi.*;
+<span style="color: #33997E;">import</span> ddf.minim.ugens.*;
+Minim&nbsp;minim;
+AudioPlayer&nbsp;bgSound;
+AudioPlayer&nbsp;bellSound;
+AudioPlayer&nbsp;shineSound;&nbsp;
+AudioPlayer&nbsp;glowSound;
+<span style="color: #E2661A;">boolean</span> play;
+
+<span style="color: #33997E;">import</span> processing.video.*;
+Movie&nbsp;video;
+
+<span style="color: #666666;">//showing&nbsp;text</span>
+<span style="color: #E2661A;">int</span> value = 0;
+<span style="color: #E2661A;">int</span> value1 = 0;
+<span style="color: #E2661A;">int</span> value2 = #02AF97;
+<span style="color: #E2661A;">int</span> value3 = 0;
+<span style="color: #E2661A;">int</span> value4 = 0;
+<span style="color: #E2661A;">int</span> value5 = 0;
+<span style="color: #E2661A;">int</span> value6 = 0;
+<span style="color: #E2661A;">int</span> value7 = 0;
+<span style="color: #E2661A;">int</span> value8 = #D7B9FF;
+<span style="color: #E2661A;">int</span> value9 = 0;
+<span style="color: #E2661A;">int</span> value10 = 0;
+<span style="color: #E2661A;">int</span> value11 = 2;
+<span style="color: #E2661A;">PFont</span> Afont;
+<span style="color: #E2661A;">float</span> a;
+<span style="color: #E2661A;">float</span> b;
+
+
+<span style="color: #666666;">//&nbsp;water</span>
+<span style="color: #E2661A;">int</span> cols, rows; <span style="color: #666666;">//col=height, row=width</span>
+<span style="color: #E2661A;">int</span> scl = 20; <span style="color: #666666;">//scl = scale</span>
+<span style="color: #E2661A;">int</span> w = 1300; <span style="color: #666666;">//water scale</span>
+<span style="color: #E2661A;">int</span> h = 900;
+<span style="color: #E2661A;">float</span> flying = 0;
+<span style="color: #E2661A;">float</span> [][] water;
+
+<span style="color: #666666;">//&nbsp;object&nbsp;rotation</span>
+<span style="color: #E2661A;">float</span> rotyBox0;
+<span style="color: #E2661A;">float</span> rotyBox1;
+<span style="color: #E2661A;">float</span> rotyBox2;
+<span style="color: #E2661A;">float</span> rotyBox3;
+<span style="color: #E2661A;">float</span> rotyBox4;
+<span style="color: #E2661A;">float</span> rotyBox5;
+<span style="color: #E2661A;">float</span> rotx = <span style="color: #718A62;">PI</span>/4;
+<span style="color: #E2661A;">float</span> roty = <span style="color: #718A62;">PI</span>/4;
+
+<span style="color: #666666;">//&nbsp;object&nbsp;moving(front&nbsp;sphere)</span>
+<span style="color: #E2661A;">int</span> G = 0;
+<span style="color: #E2661A;">int</span> T = 0;
+<span style="color: #E2661A;">int</span> direction = 1;
+
+<span style="color: #666666;">//dots</span>
+<span style="color: #E2661A;">PVector</span>[] points = <span style="color: #33997E;">new</span> <span style="color: #E2661A;">PVector</span>[6];
+<span style="color: #E2661A;">PVector</span>[] points2 = <span style="color: #33997E;">new</span> <span style="color: #E2661A;">PVector</span>[1];
+<span style="color: #E2661A;">PVector</span>[] points3 = <span style="color: #33997E;">new</span> <span style="color: #E2661A;">PVector</span>[1];
+
+<span style="color: #666666;">//&nbsp;3d&nbsp;objects</span>
+<span style="color: #E2661A;">PShape</span> house;
+<span style="color: #E2661A;">PImage</span> housetex;
+<span style="color: #E2661A;">PShape</span> Abuilding;
+<span style="color: #E2661A;">PShape</span> Plantbowl;
+<span style="color: #E2661A;">PShape</span> landshape;
+<span style="color: #E2661A;">PShape</span> landshape2;
+<span style="color: #E2661A;">PShape</span> tree;
+
+<span style="color: #666666;">//bubble</span>
+<span style="color: #E2661A;">int</span> currentFrame = 0;
+<span style="color: #E2661A;">int</span> numFrames = 81;
+<span style="color: #E2661A;">PImage</span>[]images = <span style="color: #33997E;">new</span> <span style="color: #E2661A;">PImage</span>[numFrames];
+
+<span style="color: #666666;">//making&nbsp;star</span>
+Star[]&nbsp;stars&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Star[800];
+<span style="color: #E2661A;">float</span> speed2;
+
+<span style="color: #33997E;">void</span> <span style="color: #006699;"><b>setup</b></span>(){
+&nbsp;&nbsp;<span style="color: #006699;">size</span>(800, 800, <span style="color: #718A62;">P3D</span>);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//making star</span>
+&nbsp;&nbsp;<span style="color: #669900;">for</span>(<span style="color: #E2661A;">int</span> i = 0; i &lt; stars.<span style="color: #33997E;">length</span>; i++){
+&nbsp;&nbsp;&nbsp;&nbsp;stars[i]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Star();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// background ocean movie</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;video&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Movie (<span style="color: #33997E;">this</span>, <span style="color: #7D4793;">&quot;ocean.mov&quot;</span>);
+&nbsp;&nbsp;video.<span style="color: #006699;">loop</span>();
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// making water</span>
+&nbsp;&nbsp;cols&nbsp;=&nbsp;w&nbsp;/&nbsp;scl;
+&nbsp;&nbsp;rows&nbsp;=&nbsp;h/&nbsp;scl;
+&nbsp;&nbsp;water&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #E2661A;">float</span>[cols][rows];
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//making white dots</span>
+&nbsp;&nbsp;points[0]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(-90, -90, 0);
+&nbsp;&nbsp;points[1]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(90, -90, 0);
+&nbsp;&nbsp;points[2]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(90, 90, 0);
+&nbsp;&nbsp;points[3]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(-90, 90, 0);
+&nbsp;&nbsp;points[4]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(180, -180, 0);
+&nbsp;&nbsp;points[5]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(200, -180, 0);
+&nbsp;&nbsp;<span style="color: #666666;">//making dots 2</span>
+&nbsp;&nbsp;points2[0]&nbsp;=&nbsp;<span style="color: #33997E;">new</span> <span style="color: #006699;">PVector</span>(680, 200, 300);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//import 3d object file &amp; texture</span>
+&nbsp;&nbsp;house&nbsp;=&nbsp;<span style="color: #006699;">loadShape</span>(<span style="color: #7D4793;">&quot;house.obj&quot;</span>);
+&nbsp;&nbsp;housetex&nbsp;=&nbsp;<span style="color: #006699;">loadImage</span>(<span style="color: #7D4793;">&quot;CubeSurface_Color.jpg&quot;</span>);
+&nbsp;&nbsp;house.setTexture(housetex);
+&nbsp;&nbsp;Abuilding&nbsp;=&nbsp;<span style="color: #006699;">loadShape</span>(<span style="color: #7D4793;">&quot;building.obj&quot;</span>);
+&nbsp;&nbsp;Plantbowl&nbsp;=&nbsp;<span style="color: #006699;">loadShape</span>(<span style="color: #7D4793;">&quot;greenplant.obj&quot;</span>);
+&nbsp;&nbsp;landshape&nbsp;=&nbsp;<span style="color: #006699;">loadShape</span>(<span style="color: #7D4793;">&quot;land.obj&quot;</span>);
+&nbsp;&nbsp;landshape2&nbsp;=&nbsp;<span style="color: #006699;">loadShape</span>(<span style="color: #7D4793;">&quot;landland.obj&quot;</span>);
+&nbsp;&nbsp;tree&nbsp;=&nbsp;<span style="color: #006699;">loadShape</span>(<span style="color: #7D4793;">&quot;treee.obj&quot;</span>);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//sound</span>
+&nbsp;&nbsp;minim&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Minim(<span style="color: #33997E;">this</span>);
+&nbsp;&nbsp;bgSound&nbsp;=&nbsp;minim.loadFile(<span style="color: #7D4793;">&quot;background2.mp3&quot;</span>);
+&nbsp;&nbsp;bgSound.<span style="color: #006699;">loop</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;minim&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Minim(<span style="color: #33997E;">this</span>);
+&nbsp;&nbsp;bellSound&nbsp;=&nbsp;minim.loadFile(<span style="color: #7D4793;">&quot;bell.mp3&quot;</span>);
+&nbsp;&nbsp;
+&nbsp;&nbsp;minim&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Minim(<span style="color: #33997E;">this</span>);
+&nbsp;&nbsp;shineSound&nbsp;=&nbsp;minim.loadFile(<span style="color: #7D4793;">&quot;shine.mp3&quot;</span>);
+&nbsp;&nbsp;
+&nbsp;&nbsp;minim&nbsp;=&nbsp;<span style="color: #33997E;">new</span> Minim(<span style="color: #33997E;">this</span>);
+&nbsp;&nbsp;glowSound&nbsp;=&nbsp;minim.loadFile(<span style="color: #7D4793;">&quot;glow.mp3&quot;</span>);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//font</span>
+&nbsp;&nbsp;Afont&nbsp;=&nbsp;<span style="color: #006699;">loadFont</span>(<span style="color: #7D4793;">&quot;AppleSDGothicNeoH00-32.vlw&quot;</span>);
+}
+
+&nbsp;&nbsp;<span style="color: #666666;">// background ocean movie</span>
+&nbsp;&nbsp;<span style="color: #33997E;">void</span> movieEvent(Movie video){
+&nbsp;&nbsp;video.read();
+}
+
+<span style="color: #33997E;">void</span> <span style="color: #006699;"><b>draw</b></span>(){
+&nbsp;&nbsp;<span style="color: #006699;">background</span>(96, 120, 145);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// floating sphere 1</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">filter</span>(<span style="color: #718A62;">BLUR</span>, 3);
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(#25E8E3);
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(300, 500, 130);
+&nbsp;&nbsp;<span style="color: #006699;">sphereDetail</span>(10);
+&nbsp;&nbsp;<span style="color: #006699;">sphere</span>(35);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// floating sphere 1</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(52, 0, 120, 80);
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(300, 500, 200);
+&nbsp;&nbsp;<span style="color: #006699;">sphereDetail</span>(10);
+&nbsp;&nbsp;<span style="color: #006699;">sphere</span>(30);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//sound play, !play</span>
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value5 == 0){
+&nbsp;&nbsp;&nbsp;&nbsp;bellSound.pause();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value5 == 1){
+&nbsp;&nbsp;&nbsp;&nbsp;bellSound.play();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value6 == 0){
+&nbsp;&nbsp;&nbsp;&nbsp;shineSound.pause();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value6 == 1){
+&nbsp;&nbsp;&nbsp;&nbsp;shineSound.play();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;<span style="color: #669900;">if</span> (value9 == 0){
+&nbsp;&nbsp;&nbsp;&nbsp;glowSound.pause();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value9 == 1){
+&nbsp;&nbsp;&nbsp;&nbsp;glowSound.play();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//background ocean.mov</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(-300, -300, -400);
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(2.5);
+&nbsp;&nbsp;<span style="color: #006699;">image</span>(video, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//water</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;flying&nbsp;+=&nbsp;0.01;&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #E2661A;">float</span> yoff = flying; <span style="color: #666666;">//off= offset</span>
+&nbsp;&nbsp;<span style="color: #669900;">for</span> (<span style="color: #E2661A;">int</span> y = 0; y &lt; rows; y++){
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E2661A;">float</span> xoff = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #669900;">for</span> (<span style="color: #E2661A;">int</span> x = 0; x &lt; cols; x++){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;water[x][y]&nbsp;=&nbsp;<span style="color: #006699;">map</span>(<span style="color: #006699;">noise</span>(xoff, yoff), 0, 1, -100, 100);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xoff&nbsp;+=&nbsp;0.1;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;yoff&nbsp;+=&nbsp;0.1;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(200);
+&nbsp;&nbsp;<span style="color: #006699;">strokeWeight</span>(0.3);
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(<span style="color: #D94A7A;">width</span>/2, <span style="color: #D94A7A;">height</span>/2);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #718A62;">PI</span>/3);
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(value2, 70); <span style="color: #666666;">//original water color: #02AF97</span>
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(-w/2, -h/2);
+&nbsp;&nbsp;<span style="color: #669900;">for</span> (<span style="color: #E2661A;">int</span> y = 0; y &lt; rows-1; y++){
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">beginShape</span>(<span style="color: #718A62;">TRIANGLE_STRIP</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #669900;">for</span> (<span style="color: #E2661A;">int</span> x = 0; x &lt; cols; x++){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">vertex</span>(x*scl, y*scl, water[x][y]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">vertex</span>(x*scl, (y+1)*scl, water[x][y+1]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666666;">//rect(x*scl, y*scl, scl, scl);</span>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">endShape</span>();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// center white box</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(255);
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(400, 400, 0);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotx);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(roty);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #718A62;">PI</span>);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotyBox0);
+&nbsp;&nbsp;rotyBox0&nbsp;+=&nbsp;0.04;
+&nbsp;&nbsp;<span style="color: #006699;">box</span>(65);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// right up grey box</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(230);
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(700, 200, -20);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #718A62;">PI</span>);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox2);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotyBox0);
+&nbsp;&nbsp;rotyBox0&nbsp;+=&nbsp;0.04;
+&nbsp;&nbsp;<span style="color: #006699;">box</span>(45);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// left middle balck box</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(10);
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(0, 210, -340);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #718A62;">PI</span>);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox3);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotyBox0);
+&nbsp;&nbsp;rotyBox0&nbsp;+=&nbsp;0.04;
+&nbsp;&nbsp;<span style="color: #006699;">box</span>(50);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// left up balck box</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(0);
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(-90, 0, -340);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #718A62;">PI</span>);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox2);
+&nbsp;&nbsp;rotyBox2&nbsp;-=&nbsp;0.01;&nbsp;
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotyBox0);
+&nbsp;&nbsp;rotyBox0&nbsp;-=&nbsp;0.06;
+&nbsp;&nbsp;<span style="color: #006699;">box</span>(80);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// floating sphere 2</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">strokeWeight</span>(2);
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(10);
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(44, 77, 92);
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(375+G, 525+T, 290);
+&nbsp;&nbsp;G&nbsp;+=&nbsp;1*direction;
+&nbsp;&nbsp;T&nbsp;+=&nbsp;1*direction;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (G &gt; 70){
+&nbsp;&nbsp;&nbsp;&nbsp;direction&nbsp;=&nbsp;-direction;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(G &lt; 0){
+&nbsp;&nbsp;&nbsp;&nbsp;direction&nbsp;=&nbsp;-direction;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (T &gt; 20){
+&nbsp;&nbsp;&nbsp;&nbsp;direction&nbsp;=&nbsp;-direction;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(T &lt; 1){
+&nbsp;&nbsp;&nbsp;&nbsp;direction&nbsp;=&nbsp;-direction;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #006699;">sphereDetail</span>(10);
+&nbsp;&nbsp;<span style="color: #006699;">sphere</span>(20);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//center 4 points(dots)</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(<span style="color: #D94A7A;">width</span>/2, <span style="color: #D94A7A;">height</span>/2);
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(0);
+&nbsp;&nbsp;<span style="color: #006699;">strokeWeight</span>(16);
+&nbsp;&nbsp;<span style="color: #006699;">noFill</span>();
+&nbsp;&nbsp;<span style="color: #669900;">for</span> (<span style="color: #E2661A;">PVector</span> v : points){
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">point</span>(v.x, v.y);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//front black ellipse</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(0);
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(300, 530, 370);
+&nbsp;&nbsp;<span style="color: #006699;">ellipse</span>(0, 0, 30, 30);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//middle black ellipse</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(0);
+&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(420, 320, 200);
+&nbsp;&nbsp;<span style="color: #006699;">ellipse</span>(0, 0, 50, 50);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//3d house 1 object </span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(0.5);
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(<span style="color: #D94A7A;">width</span>/2, 800, -200);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(170));
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotx/8);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(roty/8);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox1);
+&nbsp;&nbsp;rotyBox1&nbsp;+=&nbsp;0.008;
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(house, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//3d house 2 object </span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(0.6);
+&nbsp;&nbsp;<span style="color: #006699;">lights</span>();
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(1000, 840, 120);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(150));
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(rotx/2);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(roty/2);
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox2);
+&nbsp;&nbsp;rotyBox2&nbsp;-=&nbsp;0.03;
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(house, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//3d plant 1</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(255);
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(525, 300, 100);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(150));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox4);
+&nbsp;&nbsp;rotyBox4&nbsp;+=&nbsp;0.005;
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(0.8);
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(Plantbowl, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//3d land</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(255);
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(570, 150, -150);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(150));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox5);
+&nbsp;&nbsp;rotyBox5&nbsp;-=&nbsp;0.003;
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(1.5);
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(landshape, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//3d land 2</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(255);
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(250, 500, 200);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(150));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(<span style="color: #006699;">radians</span>(-30));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox5);
+&nbsp;&nbsp;rotyBox5&nbsp;-=&nbsp;0.003;
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(0.7);
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(landshape2, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">// 3d building object</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(0.7);
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(130, 800, 150);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(160));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(<span style="color: #006699;">radians</span>(40));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox3);
+&nbsp;&nbsp;rotyBox3&nbsp;-=&nbsp;0.009;
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(Abuilding, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(255, value);
+&nbsp;&nbsp;<span style="color: #006699;">textSize</span>(32);
+&nbsp;&nbsp;<span style="color: #006699;">textFont</span>(Afont);
+&nbsp;&nbsp;<span style="color: #006699;">text</span>(<span style="color: #7D4793;">&quot;Hello World&quot;</span>, 270, 350);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(#DCB4FF, value1);
+&nbsp;&nbsp;<span style="color: #006699;">textSize</span>(32);
+&nbsp;&nbsp;<span style="color: #006699;">text</span>(<span style="color: #7D4793;">&quot;Your House&quot;</span>, 610, 300);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(#9431FF, value1);
+&nbsp;&nbsp;<span style="color: #006699;">textSize</span>(45);
+&nbsp;&nbsp;<span style="color: #006699;">text</span>(<span style="color: #7D4793;">&quot;NONPLACE&quot;</span>, 300, 450, 300);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(0, value7);
+&nbsp;&nbsp;<span style="color: #006699;">textSize</span>(50);
+&nbsp;&nbsp;<span style="color: #006699;">text</span>(<span style="color: #7D4793;">&quot;short lease&quot;</span>, 300, 570, 300);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//floating text</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(#65c9af);
+&nbsp;&nbsp;<span style="color: #006699;">textSize</span>(40);
+&nbsp;&nbsp;a&nbsp;=&nbsp;a+8;
+&nbsp;&nbsp;<span style="color: #006699;">text</span>(<span style="color: #7D4793;">&quot;Click Anything&quot;</span>, 270+a, 150, 20);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//text ahh-</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">fill</span>(#7EC6FF, value10);
+&nbsp;&nbsp;<span style="color: #006699;">textSize</span>(40);
+&nbsp;&nbsp;<span style="color: #006699;">text</span>(<span style="color: #7D4793;">&quot;city &amp; non-city&quot;</span>, -10, 100, -170);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//tree</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(255);
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(570, 600, 250);
+&nbsp;&nbsp;<span style="color: #006699;">rotateX</span>(<span style="color: #006699;">radians</span>(180));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(<span style="color: #006699;">radians</span>(-10));
+&nbsp;&nbsp;<span style="color: #006699;">rotateY</span>(rotyBox5);
+&nbsp;&nbsp;rotyBox5&nbsp;-=&nbsp;0.003;
+&nbsp;&nbsp;<span style="color: #006699;">scale</span>(0.8);
+&nbsp;&nbsp;<span style="color: #006699;">shape</span>(tree, 0, 0);
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//making star</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #666666;">//speed2 = map(mouseX, 0, width, 10, 20);</span>
+&nbsp;&nbsp;<span style="color: #006699;">translate</span>(<span style="color: #D94A7A;">width</span>/2, <span style="color: #D94A7A;">height</span>/2);
+&nbsp;&nbsp;<span style="color: #669900;">for</span>(<span style="color: #E2661A;">int</span> i = 0; i &lt; stars.<span style="color: #33997E;">length</span>; i++){
+&nbsp;&nbsp;&nbsp;&nbsp;stars[i].update();
+&nbsp;&nbsp;&nbsp;&nbsp;stars[i].show();
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #666666;">//big point</span>
+&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(value4, 99);
+&nbsp;&nbsp;<span style="color: #006699;">strokeWeight</span>(200);
+&nbsp;&nbsp;<span style="color: #006699;">filter</span>(<span style="color: #718A62;">BLUR</span>, value3);
+&nbsp;&nbsp;<span style="color: #006699;">noFill</span>();
+&nbsp;&nbsp;<span style="color: #669900;">for</span> (<span style="color: #E2661A;">PVector</span> v : points2){
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">point</span>(v.x, v.y);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;}
+
+
+
+<span style="color: #33997E;">void</span> <span style="color: #006699;"><b>mouseClicked</b></span>(){
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value == 0 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 335 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 465 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 335 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 465) {
+&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;=&nbsp;300;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value == 300 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 335 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 465 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 335 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 465) {
+&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;=&nbsp;0;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value1 == 0 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 500 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 800 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 400 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 600) {
+&nbsp;&nbsp;&nbsp;&nbsp;value1&nbsp;=&nbsp;300;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value1 == 300 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 600 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 800 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 400 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 600) {
+&nbsp;&nbsp;&nbsp;&nbsp;value1&nbsp;=&nbsp;0;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value2 == #02AF97 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 200 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 300 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 500 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 600) {
+&nbsp;&nbsp;&nbsp;&nbsp;value2&nbsp;=&nbsp;0;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value2 == 0 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 200 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 300 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 500 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 600) {
+&nbsp;&nbsp;&nbsp;&nbsp;value2&nbsp;=&nbsp;#02AF97;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value3 == 0 &amp;&amp; value4 == 0 &amp;&amp; value5 == 0 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 550 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 780 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 120 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 380){
+&nbsp;&nbsp;&nbsp;&nbsp;value3&nbsp;=&nbsp;7;
+&nbsp;&nbsp;&nbsp;&nbsp;value4&nbsp;=&nbsp;255;
+&nbsp;&nbsp;&nbsp;&nbsp;value5&nbsp;=&nbsp;1;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value3 == 7 &amp;&amp; value4 == 255 &amp;&amp; value5 == 1 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 550 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 780 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 120 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 380){
+&nbsp;&nbsp;&nbsp;&nbsp;value3&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;value4&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;value5&nbsp;=&nbsp;0;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value6 == 0 &amp;&amp; value7 ==0 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 100 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 300 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 250 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 400) {
+&nbsp;&nbsp;&nbsp;&nbsp;value6&nbsp;=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;value7&nbsp;=&nbsp;300;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value6 == 1 &amp;&amp; value7 == 300 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 100 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 300 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 250 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 400) {
+&nbsp;&nbsp;&nbsp;&nbsp;value6&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;value7&nbsp;=&nbsp;0;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value8 == #D7B9FF &amp;&amp; value11 == 2 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 200 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 600 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 200 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 600) {
+&nbsp;&nbsp;&nbsp;&nbsp;value8&nbsp;=&nbsp;#954BF7;
+&nbsp;&nbsp;&nbsp;&nbsp;value11&nbsp;=&nbsp;5;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value8 == #954BF7 &amp;&amp; value11 == 5 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 200 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 600 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 200 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 600) {
+&nbsp;&nbsp;&nbsp;&nbsp;value8&nbsp;=&nbsp;#D7B9FF;
+&nbsp;&nbsp;&nbsp;&nbsp;value11&nbsp;=&nbsp;2;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #669900;">if</span> (value9 == 0 &amp;&amp; value10 == 0 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 150 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 220 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 620 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 700) {
+&nbsp;&nbsp;&nbsp;&nbsp;value9&nbsp;=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;value10&nbsp;=&nbsp;300;
+&nbsp;&nbsp;}&nbsp;<span style="color: #669900;">else</span> <span style="color: #669900;">if</span>(value9 == 1 &amp;&amp; value10 == 300 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &gt; 150 &amp;&amp; <span style="color: #D94A7A;">mouseX</span> &lt; 220 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &gt; 620 &amp;&amp; <span style="color: #D94A7A;">mouseY</span> &lt; 700) {
+&nbsp;&nbsp;&nbsp;&nbsp;value9&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;value10&nbsp;=&nbsp;0;
+&nbsp;&nbsp;}
+}
+
+<span style="color: #33997E;">void</span> <span style="color: #006699;"><b>mouseDragged</b></span>() {
+&nbsp;&nbsp;<span style="color: #E2661A;">float</span> rate = 0.01;
+&nbsp;&nbsp;rotx&nbsp;+=&nbsp;(<span style="color: #D94A7A;">pmouseY</span>-<span style="color: #D94A7A;">mouseY</span>) * rate;
+&nbsp;&nbsp;roty&nbsp;+=&nbsp;(<span style="color: #D94A7A;">mouseX</span>-<span style="color: #D94A7A;">pmouseX</span>) * rate;
+}
+
+<span style="color: #33997E;">class</span> Star {
+&nbsp;&nbsp;<span style="color: #E2661A;">float</span> aa;
+&nbsp;&nbsp;<span style="color: #E2661A;">float</span> bb;
+&nbsp;&nbsp;<span style="color: #E2661A;">float</span> cc;
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #E2661A;">float</span> pcc;
+&nbsp;&nbsp;
+&nbsp;&nbsp;Star(){
+&nbsp;&nbsp;&nbsp;&nbsp;aa&nbsp;=&nbsp;<span style="color: #006699;">random</span>(-<span style="color: #D94A7A;">width</span>, <span style="color: #D94A7A;">width</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;bb&nbsp;=&nbsp;<span style="color: #006699;">random</span>(-<span style="color: #D94A7A;">height</span>, <span style="color: #D94A7A;">height</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;cc&nbsp;=&nbsp;<span style="color: #006699;">random</span>(<span style="color: #D94A7A;">width</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;pcc&nbsp;=&nbsp;cc;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #33997E;">void</span> update(){
+&nbsp;&nbsp;&nbsp;&nbsp;cc&nbsp;=&nbsp;cc&nbsp;-&nbsp;20;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #669900;">if</span>(cc &lt;1){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cc&nbsp;=&nbsp;<span style="color: #D94A7A;">width</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aa&nbsp;=&nbsp;<span style="color: #006699;">random</span>(-<span style="color: #D94A7A;">width</span>, <span style="color: #D94A7A;">width</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bb&nbsp;=&nbsp;<span style="color: #006699;">random</span>(-<span style="color: #D94A7A;">height</span>, <span style="color: #D94A7A;">height</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcc&nbsp;=&nbsp;cc;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #33997E;">void</span> show(){
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">fill</span>(255);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">noStroke</span>();
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E2661A;">float</span> saa = <span style="color: #006699;">map</span>(aa/cc, 0, 1, 0, <span style="color: #D94A7A;">width</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E2661A;">float</span> sbb = <span style="color: #006699;">map</span>(bb/cc, 0, 1, 0, <span style="color: #D94A7A;">height</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E2661A;">float</span> r = <span style="color: #006699;">map</span>(cc, 0, <span style="color: #D94A7A;">width</span>, 16, 0);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666666;">//ellipse(saa, sbb, r, r);</span>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E2661A;">float</span> paa = <span style="color: #006699;">map</span>(aa/pcc, 0, 1, 0, <span style="color: #D94A7A;">width</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E2661A;">float</span> pbb = <span style="color: #006699;">map</span>(bb/pcc, 0, 1, 0, <span style="color: #D94A7A;">height</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;pcc&nbsp;=&nbsp;cc;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">pushMatrix</span>();
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">stroke</span>(value8);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">strokeWeight</span>(value11);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">line</span>(paa, pbb, saa, sbb);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #006699;">popMatrix</span>();
+&nbsp;&nbsp;}
+}
+
+</pre></body></html>
+
+</p>
+
+      <br><br><br><br><br><br><h2 id="childlist">E-mail: wldus5038@naver.com
+      <br>INSTAGRAM: <a href="https://www.instagram.com/kiijiiyee/" id="childlista" target="_blank">@kiijiiyee</h2>
+
+    </body>
+</html>
